@@ -1,21 +1,14 @@
-FROM node:24-alpine
-
-# Install necessary packages
-RUN apk add --no-cache bash
+FROM node:20  # or node:24, but NOT alpine
 
 WORKDIR /app
 
-# Copy and install dependencies
+# Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
 
-# Ensure vite binary is executable
-RUN chmod +x node_modules/.bin/vite
-
-# Copy remaining files
+# Copy source code
 COPY . .
 
 EXPOSE 5173
 
-# Run using bash to avoid "sh: permission denied"
-CMD [ "bash", "-c", "npm run dev" ]
+CMD ["npm", "run", "dev"]
