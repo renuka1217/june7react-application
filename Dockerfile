@@ -1,13 +1,13 @@
-FROM node:20
+FROM node:24-alpine
+
 WORKDIR /app
 
-# Copy package files and install dependencies
-COPY package*.json ./
+COPY package*.json .
+
 RUN npm install
 
-# Copy source code
 COPY . .
 
 EXPOSE 5173
 
-CMD ["npm", "run", "dev"]
+CMD [ "npm","run","dev" ]
