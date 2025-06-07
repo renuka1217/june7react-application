@@ -1,7 +1,7 @@
 FROM node:24-alpine
 
-# Install required dependencies
-RUN apk add --no-cache dumb-init
+# Install necessary packages
+RUN apk add --no-cache bash
 
 WORKDIR /app
 
@@ -9,16 +9,13 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Ensure vite is executable
+# Ensure vite binary is executable
 RUN chmod +x node_modules/.bin/vite
 
-# Copy app code
+# Copy remaining files
 COPY . .
 
 EXPOSE 5173
 
-# Use dumb-init for better signal handling and shell compatibility
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-
-# Start app
-CMD ["npm", "run", "dev"]
+# Run using bash to avoid "sh: permission denied"
+CMD [ "bash", "-c", "npm run dev" ]
