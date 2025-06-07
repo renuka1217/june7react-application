@@ -1,5 +1,4 @@
-FROM node:20  # or node:24, but NOT alpine
-
+FROM node:20
 WORKDIR /app
 
 # Copy package files and install dependencies
