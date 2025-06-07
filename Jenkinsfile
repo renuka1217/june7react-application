@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/renuka1217/june7react-application.git'
+                git url:'https://github.com/renuka1217/june7react-application.git',branch: 'main'
             }
         }
 
